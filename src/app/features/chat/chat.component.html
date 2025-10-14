@@ -1,0 +1,71 @@
+<mat-card class="chat-card glass">
+  <div class="chat-window" #chatWindow>
+    <div *ngIf="history.length === 0" class="empty">
+      💬 Ask me something — try <strong>"What is Angular?"</strong>
+    </div>
+
+    <div class="messages">
+      <ng-container *ngFor="let item of history">
+        <div class="message-row user">
+          <img src="assets/user-avatar.png" alt="User" class="avatar" />
+          <div class="bubble user-bubble">{{ item.question }}</div>
+        </div>
+
+        <div class="message-row ai">
+          <img src="assets/ai-avatar.png" alt="AI" class="avatar" />
+
+          <div class="bubble ai-bubble">
+            <ng-container *ngIf="item.answer; else typingTpl">
+              <div class="ai-content">
+                <span class="answer-text"> {{ item.displayed || item.answer }}</span>
+                <button
+                  mat-icon-button
+                  aria-label="Replay Voice"
+                  (click)="speak(item.answer!)"
+                  class="replay-btn"
+                >
+                  <mat-icon>volume_up</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #typingTpl>
+              <div *ngIf="typing && loading" class="typing">
+                <span class="dot"></span><span class="dot"></span
+                ><span class="dot"></span>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <form (ngSubmit)="submit()" class="input-area" novalidate>
+    <mat-form-field class="input-field" appearance="outline">
+      <input
+        matInput
+        placeholder="Type your question..."
+        [formControl]="input"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="submit()"
+        aria-label="Send"
+        [disabled]="loading"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
+  <div class="footer">
+    <mat-progress-spinner
+      *ngIf="loading"
+      mode="indeterminate"
+      diameter="20"
+    ></mat-progress-spinner>
+    <span class="hint">Showing last 5 Q&A pairs</span>
+  </div>
+</mat-card>
