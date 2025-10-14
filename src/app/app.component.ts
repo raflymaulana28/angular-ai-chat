@@ -8,7 +8,7 @@ import { ThemeService } from './core/services/theme.service';
 })
 export class AppComponent {
   constructor(public themeService: ThemeService) {}
-  title = 'ai-chat';
+  title = 'angular-ai-chat';
 
   toggleTheme() {
     this.themeService.toggleTheme();

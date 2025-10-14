@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ai-chat'`, () => {
+  it(`should have as title 'angular-ai-chat'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ai-chat');
+    expect(app.title).toEqual('angular-ai-chat');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ai-chat app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-ai-chat app is running!');
   });
 });
