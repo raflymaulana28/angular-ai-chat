@@ -1,43 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { QA } from '../models/qa.models';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AiService {
-  private canned = new Map<string, string>([
-    [
-      'what is angular',
-      'Angular is a frontend framework developed by Google for building web applications.',
-    ],
-    [
-      'what is rxjs',
-      'RxJS is a library for reactive programming using Observables.',
-    ],
-    ['hello', 'Hi! How can I help you today?'],
-  ]);
+  private API_URL = 'https://68ee8211df2025af7803f236.mockapi.io/api/v1/ai/ask';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  ask(question: string): Observable<QA> {
-    const normalized = (question || '').trim().toLowerCase();
-
-    if (!normalized) {
-      return throwError(() => new Error('Question is empty')).pipe(delay(300));
-    }
-
-    const answer =
-      this.canned.get(normalized) ??
-      `Mock AI answer for: "${question}". (This is a generated mock response.)`;
-
-    const response: QA = {
-      question: question,
-      answer,
-      createdAt: new Date().toISOString(),
-    };
-
-    const randomDelay = 800 + Math.floor(Math.random() * 600);
-
-    return of(response).pipe(delay(randomDelay));
+  ask(question: string) {
+    return this.http.get<any[]>(this.API_URL).pipe(
+      map((data) => {
+        const found = data.find((item) =>
+          item.question.toLowerCase().includes(question.toLowerCase())
+        );
+        if (found) return { answer: found.answer };
+        return { answer: "I'm not sure, but I can learn more about that!" };
+      })
+    );
   }
 }
