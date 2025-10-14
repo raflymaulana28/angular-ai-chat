@@ -2,16 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
-export interface AiResponse {
-  answer: string;
-}
-
-export interface AiApiItem {
-  id?: string;
-  question: string;
-  answer?: string;
-}
+import { AiApiItem, AiResponse } from '../models/qa.models';
 
 @Injectable({
   providedIn: 'root',

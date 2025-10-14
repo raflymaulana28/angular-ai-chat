@@ -1,5 +1,9 @@
-export interface QA {
-  question: string;
+export interface AiResponse {
   answer: string;
-  createdAt: string;
+}
+
+export interface AiApiItem {
+  id?: string;
+  question: string;
+  answer?: string;
 }

@@ -1,7 +1,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { AiApiItem } from './ai.service';
+import { AiApiItem } from '../models/qa.models';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
