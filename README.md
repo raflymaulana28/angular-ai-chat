@@ -11,7 +11,6 @@ Perfect for learning how to integrate AI models (like OpenAI or custom APIs) int
 * 🌙 **Dark Mode Toggle** — Seamlessly switch between light and dark themes
 * 🗣️ **AI Voice Replies** — Uses **Web Speech API** for AI voice output
 * ⌨️ **Subtitle Typing Animation** — Realistic typing effect for AI messages
-* ⚡ **Real-time AI Integration Ready** — Easily connect with OpenAI API or your own backend
 * 📜 **Custom Scrollbar** — Beautiful smooth scrollbar design
 * 🧠 **Fully Modular Structure** — Easy to extend and maintain
 
@@ -19,7 +18,7 @@ Perfect for learning how to integrate AI models (like OpenAI or custom APIs) int
 
 ## 🧩 Tech Stack
 
-* **Angular 18+**
+* **Angular 14+**
 * **TypeScript**
 * **Angular Material**
 * **Web Speech API**
