@@ -111,7 +111,7 @@ Sample data:
 
 ```typescript
 ask(question: string) {
-  return this.http.get<any[]>(this.API_URL).pipe(
+  return this.http.get<AiApiItem[]>(this.API_URL).pipe(
     map((data) => {
       const found = data.find((item) =>
         item.question.toLowerCase().includes(question.toLowerCase())

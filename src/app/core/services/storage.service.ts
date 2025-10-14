@@ -1,4 +1,7 @@
+
+
 import { Injectable } from '@angular/core';
+import { AiApiItem } from './ai.service';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
@@ -6,16 +9,16 @@ export class StorageService {
 
   constructor() {}
 
-  getHistory(): any[] {
+  getHistory(): AiApiItem[] {
     try {
       const raw = localStorage.getItem(this.storageKey);
-      return raw ? JSON.parse(raw) : [];
+      return raw ? (JSON.parse(raw) as AiApiItem[]) : [];
     } catch {
       return [];
     }
   }
 
-  setHistory(items: any[]): void {
+  setHistory(items: AiApiItem[]): void {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(items));
     } catch (e) {
