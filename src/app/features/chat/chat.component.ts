@@ -20,7 +20,7 @@ export class ChatComponent implements AfterViewChecked {
   loading = false;
   typing = false;
   typingInterval: any;
-  shouldScroll = false;
+  shouldScroll = true;
 
   constructor(private ai: AiService, private storage: StorageService) {
     this.history = this.storage.getHistory() || [];
