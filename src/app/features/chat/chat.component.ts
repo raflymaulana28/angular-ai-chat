@@ -20,13 +20,17 @@ export class ChatComponent implements AfterViewChecked {
   loading = false;
   typing = false;
   typingInterval: any;
+  shouldScroll = false;
 
   constructor(private ai: AiService, private storage: StorageService) {
     this.history = this.storage.getHistory() || [];
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    if (this.shouldScroll) {
+      this.scrollToBottom();
+      this.shouldScroll = false;
+    }
   }
 
   private scrollToBottom() {
@@ -43,6 +47,7 @@ export class ChatComponent implements AfterViewChecked {
     this.history.push({ question, displayed: '' });
     this.loading = true;
     this.typing = true;
+    this.shouldScroll = true;
     this.input.reset();
 
     this.ai.ask(question).subscribe({
@@ -68,6 +73,7 @@ export class ChatComponent implements AfterViewChecked {
       if (i <= fullText.length) {
         this.history[index].displayed = fullText.slice(0, i);
         i++;
+        this.shouldScroll = true;
       } else {
         clearInterval(this.typingInterval);
         this.loading = false;
